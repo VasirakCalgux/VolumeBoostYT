@@ -11,6 +11,8 @@ jobs:
   build:
     name: Build VolumeBoostYT
     runs-on: macos-latest
+    permissions:
+      contents: write
 
     steps:
       - name: Checkout
@@ -47,20 +49,15 @@ jobs:
             cp .theos/obj/debug/VolumeBoostYT.dylib output/
           fi
 
-      - name: Upload .deb Package
-        uses: actions/upload-artifact@v4
-        with:
-          name: VolumeBoostYT (Jailbreak DEB)
-          path: output/*.deb
+      - name: Generate Release Tag
+        id: tag
+        run: echo "tag=$(date +'%Y.%m.%d-%H%M')" >> $GITHUB_OUTPUT
 
-      - name: Upload .dylib File
-        uses: actions/upload-artifact@v4
+      - name: Publish to GitHub Releases
+        uses: softprops/action-gh-release@v2
         with:
-          name: VolumeBoostYT (Sideload DYLIB)
-          path: output/VolumeBoostYT.dylib
-
-      - name: Upload .plist File
-        uses: actions/upload-artifact@v4
-        with:
-          name: VolumeBoostYT (Sideload PLIST)
-          path: output/VolumeBoostYT.plist
+          tag_name: ${{ steps.tag.outputs.tag }}
+          name: Release ${{ steps.tag.outputs.tag }}
+          files: output/*
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
