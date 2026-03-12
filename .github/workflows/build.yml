@@ -23,7 +23,9 @@ jobs:
         run: git clone --recursive https://github.com/theos/theos.git ${{ github.workspace }}/theos
 
       - name: Setup iOS SDKs
-        run: git clone https://github.com/theos/sdks.git ${{ github.workspace }}/theos/sdks
+        run: |
+          rm -rf ${{ github.workspace }}/theos/sdks
+          git clone https://github.com/theos/sdks.git ${{ github.workspace }}/theos/sdks
 
       - name: Build Package
         run: |
