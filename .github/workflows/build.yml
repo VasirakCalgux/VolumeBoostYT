@@ -45,8 +45,20 @@ jobs:
             cp .theos/obj/debug/VolumeBoostYT.dylib output/
           fi
 
-      - name: Upload Artifacts
+      - name: Upload .deb Package
         uses: actions/upload-artifact@v4
         with:
-          name: VolumeBoostYT-Release
-          path: output/
+          name: VolumeBoostYT (Jailbreak DEB)
+          path: output/*.deb
+
+      - name: Upload .dylib File
+        uses: actions/upload-artifact@v4
+        with:
+          name: VolumeBoostYT (Sideload DYLIB)
+          path: output/VolumeBoostYT.dylib
+
+      - name: Upload .plist File
+        uses: actions/upload-artifact@v4
+        with:
+          name: VolumeBoostYT (Sideload PLIST)
+          path: output/VolumeBoostYT.plist
