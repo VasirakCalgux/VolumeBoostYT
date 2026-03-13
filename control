@@ -1,7 +1,7 @@
 Package: com.vasirakcalgux.volumeboostyt
 Name: VolumeBoostYT
 Version: 1.0.0
-Architecture: iphoneos-arm
+Architecture: iphoneos-arm64
 Description: An awesome MobileSubstrate tweak!
 Maintainer: vasirakcalgux
 Author: vasirakcalgux
